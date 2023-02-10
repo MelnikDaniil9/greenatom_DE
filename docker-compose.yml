@@ -1,0 +1,20 @@
+version: '3.7'
+services:
+  postgres:
+    image: postgres:latest
+    networks:
+      - default_net
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: postgres
+    ports:
+      - "5432:5432"
+  spacex_loader:
+    build: .
+    depends_on:
+      - postgres
+    networks:
+      - default_net
+networks:
+    default_net:
